@@ -1,6 +1,5 @@
 const {Schema,model} = require('mongoose')
 
-
 //Create a person with this prototype:
 
 const personSchema = new Schema({

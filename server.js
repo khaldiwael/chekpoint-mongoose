@@ -8,8 +8,6 @@ const db = require("./db");
 const { find } = require('./models/person.js');
 
 // step 5
-require("dotenv").config();
-
 db();
 
 
@@ -28,10 +26,30 @@ db();
 //     :console.log('data created! ')
 // )
 
-User.find((err,data)=>{err
-    ?console.log(err)
-    :console.log("data find: \n %", data);
-})
+
+
+//Use model.find() to Search Your Database
+
+
+// User.find((err,data)=>{err
+//     ?console.log(err)
+//     :console.log("data find: \n %", data);
+// })
+
+// seconde solotion of find user
+
+const findPerson =  async () =>{
+    try{
+        const users = await User.find()
+        if(users) {
+            console.log("data find: \n %", users)
+        }
+    } catch(err) {
+    console.log('err:\n %',err);
+    }
+}
+
+findPerson()
 
 //Use model.find() to Search Your Database
 
@@ -107,24 +125,28 @@ User.find((err,data)=>{err
 //     :console.log(data)
 // })
 
-const search = function(done) {
-    let searchFavoriteFoods ="hamburger"
-    User.find({favoriteFoods:searchFavoriteFoods}).sort({name:"asc"}).limit(2).select("-age").exec(
-        function(err,data){
-            if(err){
-                done(err)
-            }else{
-                done(null,data)
-            }
-        }
-    )
-}
 
-search(function(err,data){
-    err
-    ?console.log("search error : \n %",err)
-    :console.log("search data : \n %",data)
-})
+//Chain Search Query Helpers to Narrow Search Results !!
+
+
+// const search = function(done) {
+//     let searchFavoriteFoods ="hamburger"
+//     User.find({favoriteFoods:searchFavoriteFoods}).sort({name:"asc"}).limit(2).select("-age").exec(
+//         function(err,data){
+//             if(err){
+//                 done(err)
+//             }else{
+//                 done(null,data)
+//             }
+//         }
+//     )
+// }
+
+// search(function(err,data){
+//     err
+//     ?console.log("search error : \n %",err)
+//     :console.log("search data : \n %",data)
+// })
 
 app.listen(port,(err)=>{
     err

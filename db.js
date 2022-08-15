@@ -1,8 +1,7 @@
 //db.js
 
 const mongoose = require('mongoose')
-
-const url = `mongodb+srv://wkhaldi:YMI85n2AR5dkt2sb@cluster0.tuwg596.mongodb.net/?retryWrites=true&w=majority`;
+require('dotenv/config')
 
 const connectionParams={
     useNewUrlParser: true,
@@ -11,7 +10,7 @@ const connectionParams={
 
 const db = async () => {
 
-mongoose.connect(url,connectionParams)
+mongoose.connect(process.env.MONGO_URI,connectionParams)
 .then( () => {
     console.log('Connected to the database ')
 })
